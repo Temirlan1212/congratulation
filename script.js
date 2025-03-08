@@ -62,7 +62,7 @@ function updateAndSave() {
 
   // Set a timeout for the copyLink function
   timeoutId = setTimeout(() => {
-    copyLink(false);
+    copyLink();
   }, 500);
 }
 
