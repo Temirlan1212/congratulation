@@ -62,23 +62,25 @@ function updateAndSave() {
 
   // Set a timeout for the copyLink function
   timeoutId = setTimeout(() => {
-    copyLink();
+    copyLink(false);
   }, 500);
 }
 
 // Function to copy the link to clipboard
-function copyLink() {
+function copyLink(showAlert = true) {
   const currentUrl = window.location.href; // Gets the full URL of the current page
 
   // Use the Clipboard API to copy the link to the clipboard
   navigator.clipboard
     .writeText(currentUrl)
     .then(() => {
+      if (!showAlert) return;
       alert(
         "Ссылка скопирована в буфер обмена, теперь вы можете им поделиться!"
       );
     })
     .catch((error) => {
+      if (!showAlert) return;
       alert("Не удалось скопировать ссылку. Попробуйте еще раз.");
     });
 }
