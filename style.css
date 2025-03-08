@@ -14,7 +14,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  min-height: 100vh;
+  height: 100dvh;
   background-color: var(--dark-color);
   overflow: hidden;
   perspective: 1000px;
@@ -115,6 +115,7 @@ body {
   background-color: transparent;
   border: 1px #0ab2be dotted;
   border-radius: 10px;
+  font-size: 20px;
 }
 
 #copyLinkButton:hover {
