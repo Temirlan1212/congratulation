@@ -33,26 +33,6 @@ function closeMenuOnOutsideClick(event) {
 // Add event listener for clicks outside the menu and popup
 document.addEventListener("click", closeMenuOnOutsideClick);
 
-function onValueChange(e) {
-  const value = e.target.value;
-  const currentUrl = window.location.href;
-
-  // Create a URLSearchParams object from the current URL
-  const url = new URL(currentUrl);
-  const params = new URLSearchParams(url.search);
-
-  // Update the 'name' query parameter with the input value
-  params.set("name", value);
-
-  // Update the browser's URL without reloading the page
-  window.history.pushState({}, "", `${url.pathname}?${params.toString()}`);
-
-  // Update the share link in the popup
-  const shareLinkElement = document.getElementById("shareLink");
-  shareLinkElement.textContent = `Share this link: ${window.location.href}`;
-  shareLinkElement.style.marginTop = "15px";
-}
-
 // Function to update the name based on input
 function updateName() {
   const nameInput = document.getElementById("nameInput");
@@ -68,9 +48,6 @@ function updateName() {
   const currentSearchParams = new URLSearchParams(window.location.search);
   currentSearchParams.set("name", newName);
   window.history.pushState({}, "", "?" + currentSearchParams.toString());
-
-  // Update the share link inside the popup
-  updateShareLink();
 
   // Close the popup
   toggleMenu();
@@ -89,14 +66,6 @@ function updateAndSave() {
   }, 500);
 }
 
-// Function to get and display the full website URL inside the popup
-function updateShareLink() {
-  const currentUrl = window.location.href; // Gets the full URL of the current page
-  const shareLinkElement = document.getElementById("shareLink");
-  shareLinkElement.textContent = `Share this link: ${currentUrl}`;
-  shareLinkElement.style.marginTop = "15px";
-}
-
 // Function to copy the link to clipboard
 function copyLink() {
   const currentUrl = window.location.href; // Gets the full URL of the current page
@@ -113,8 +82,6 @@ function copyLink() {
       alert("Не удалось скопировать ссылку. Попробуйте еще раз.");
     });
 }
-
-updateShareLink();
 
 // If there's already a 'name' query parameter in the URL, display it initially
 const searchParams = new URLSearchParams(window.location.search);
