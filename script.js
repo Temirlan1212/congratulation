@@ -1,4 +1,4 @@
-onload = () => {
+window.onload = () => {
   const c = setTimeout(() => {
     document.body.classList.remove("not-loaded");
     clearTimeout(c);
@@ -17,37 +17,45 @@ function toggleMenu() {
   popup.classList.toggle("active");
 }
 
-// Function to close the menu and popup when clicked outside
+// Function to close the menu when clicking outside
 function closeMenuOnOutsideClick(event) {
   const burger = document.querySelector(".burger-menu");
   const popup = document.querySelector(".popup");
 
-  // Check if the click was outside the burger menu or popup
   if (!burger.contains(event.target) && !popup.contains(event.target)) {
-    // If clicked outside, close the menu and popup
     burger.classList.remove("active");
     popup.classList.remove("active");
   }
 }
 
-// Add event listener for clicks outside the menu and popup
+// Add event listener for clicks outside the menu
 document.addEventListener("click", closeMenuOnOutsideClick);
 
-// Function to update the name based on input
-function updateName() {
+// Function to update the name and description
+function updateFields() {
   const nameInput = document.getElementById("nameInput");
-  const userNameElement = document.querySelector(".user__name");
+  const descriptionInput = document.getElementById("descriptionInput");
 
-  // Get the name from the input and update the display
-  const newName = nameInput.value;
+  const nameElement = document.querySelector(".congratulation__name");
+  const descriptionElement = document.querySelector(
+    ".congratulation__description"
+  );
+
+  const newName = nameInput.value.trim();
+  const newDescription = descriptionInput.value.trim();
+
   if (newName) {
-    userNameElement.textContent = newName;
+    nameElement.textContent = newName;
+  }
+  if (newDescription) {
+    descriptionElement.textContent = newDescription;
   }
 
-  // Optionally, update the URL (query parameter)
-  const currentSearchParams = new URLSearchParams(window.location.search);
-  currentSearchParams.set("name", newName);
-  window.history.pushState({}, "", "?" + currentSearchParams.toString());
+  // Update URL parameters
+  const params = new URLSearchParams(window.location.search);
+  params.set("name", newName);
+  params.set("title", newDescription);
+  window.history.pushState({}, "", "?" + params.toString());
 
   // Close the popup
   toggleMenu();
@@ -56,11 +64,11 @@ function updateName() {
 let timeoutId;
 
 function updateAndSave() {
-  updateName();
+  updateFields();
 
   clearTimeout(timeoutId);
 
-  // Set a timeout for the copyLink function
+  // Set a timeout to copy the link
   timeoutId = setTimeout(() => {
     copyLink();
   }, 500);
@@ -68,9 +76,8 @@ function updateAndSave() {
 
 // Function to copy the link to clipboard
 function copyLink(showAlert = true) {
-  const currentUrl = window.location.href; // Gets the full URL of the current page
+  const currentUrl = window.location.href;
 
-  // Use the Clipboard API to copy the link to the clipboard
   navigator.clipboard
     .writeText(currentUrl)
     .then(() => {
@@ -79,16 +86,24 @@ function copyLink(showAlert = true) {
         "Ссылка скопирована в буфер обмена, теперь вы можете им поделиться!"
       );
     })
-    .catch((error) => {
+    .catch(() => {
       if (!showAlert) return;
       alert("Не удалось скопировать ссылку. Попробуйте еще раз.");
     });
 }
 
-// If there's already a 'name' query parameter in the URL, display it initially
+// Load values from URL if available
 const searchParams = new URLSearchParams(window.location.search);
 const nameFromURL = searchParams.get("name");
+const descriptionFromURL = searchParams.get("title");
+
 if (nameFromURL) {
-  document.querySelector(".user__name").textContent = nameFromURL;
+  document.querySelector(".congratulation__name").textContent = nameFromURL;
   document.getElementById("nameInput").value = nameFromURL;
+}
+
+if (descriptionFromURL) {
+  document.querySelector(".congratulation__description").textContent =
+    descriptionFromURL;
+  document.getElementById("descriptionInput").value = descriptionFromURL;
 }

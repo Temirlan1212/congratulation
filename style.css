@@ -110,7 +110,7 @@ body {
   font-size: 21px;
 }
 
-#nameInput {
+.popup .content input {
   width: 100%;
   padding: 5px 10px;
   border-radius: 10px;
@@ -145,7 +145,7 @@ body {
   width: 80dvw;
 }
 
-.user__name {
+.congratulation__name {
   font-size: 24px;
 }
 
@@ -171,7 +171,7 @@ body {
     transform: rotate(20deg);
   }
 }
-.user {
+.congratulation {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -188,7 +188,7 @@ body {
   backdrop-filter: blur(30px);
   animation: bloom 5s ease-out;
 
-  .user__title {
+  .congratulation__title {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -197,7 +197,7 @@ body {
     }
   }
 
-  .user__light {
+  .congratulation__light {
     position: absolute;
     bottom: 0vmin;
     width: 1.5vmin;
@@ -207,38 +207,38 @@ body {
     filter: blur(0.2vmin);
     animation: light-ans 4s linear infinite backwards;
   }
-  .user__light:nth-child(odd) {
+  .congratulation__light:nth-child(odd) {
     background-color: #23f0ff;
   }
-  .user__light--1 {
+  .congratulation__light--1 {
     left: -2vmin;
     animation-delay: 1s;
   }
-  .user__light--2 {
+  .congratulation__light--2 {
     left: 3vmin;
     animation-delay: 0.5s;
   }
-  .user__light--3 {
+  .congratulation__light--3 {
     left: -6vmin;
     animation-delay: 0.3s;
   }
-  .user__light--4 {
+  .congratulation__light--4 {
     right: 6vmin;
     animation-delay: 0.9s;
   }
-  .user__light--5 {
+  .congratulation__light--5 {
     right: -1vmin;
     animation-delay: 1.5s;
   }
-  .user__light--6 {
+  .congratulation__light--6 {
     right: -4vmin;
     animation-delay: 3s;
   }
-  .user__light--7 {
+  .congratulation__light--7 {
     right: 3vmin;
     animation-delay: 2s;
   }
-  .user__light--8 {
+  .congratulation__light--8 {
     right: -6vmin;
     animation-delay: 3.5s;
   }
@@ -246,7 +246,7 @@ body {
 
 /* Mobile screens */
 @media (max-width: 768px) {
-  .user {
+  .congratulation {
     top: 30%; /* Change top position to 30% on mobile */
   }
 }
