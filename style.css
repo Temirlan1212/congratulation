@@ -55,6 +55,23 @@ body {
   transform: translateY(-6px) rotate(-45deg);
 }
 
+.github-icon {
+  position: fixed;
+  z-index: 1001;
+  top: 10px;
+  left: 10px;
+  margin: 20px;
+  cursor: pointer;
+
+  svg {
+    fill: #00fffb89;
+  }
+
+  svg:hover {
+    fill: #00fffbae;
+  }
+}
+
 /* Popup Styles */
 .popup {
   display: none;
