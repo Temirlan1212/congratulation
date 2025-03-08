@@ -17,9 +17,23 @@ function toggleMenu() {
   popup.classList.toggle("active");
 }
 
-function onValueChange(e) {
-  console.log(e);
+// Function to close the menu and popup when clicked outside
+function closeMenuOnOutsideClick(event) {
+  const burger = document.querySelector(".burger-menu");
+  const popup = document.querySelector(".popup");
 
+  // Check if the click was outside the burger menu or popup
+  if (!burger.contains(event.target) && !popup.contains(event.target)) {
+    // If clicked outside, close the menu and popup
+    burger.classList.remove("active");
+    popup.classList.remove("active");
+  }
+}
+
+// Add event listener for clicks outside the menu and popup
+document.addEventListener("click", closeMenuOnOutsideClick);
+
+function onValueChange(e) {
   const value = e.target.value;
   const currentUrl = window.location.href;
 
@@ -74,6 +88,7 @@ function updateAndSave() {
     copyLink();
   }, 500);
 }
+
 // Function to get and display the full website URL inside the popup
 function updateShareLink() {
   const currentUrl = window.location.href; // Gets the full URL of the current page
@@ -91,7 +106,7 @@ function copyLink() {
     .writeText(currentUrl)
     .then(() => {
       alert(
-        "Ссылка скопирована в буфер обмена, теперь вы можете им поделится!"
+        "Ссылка скопирована в буфер обмена, теперь вы можете им поделиться!"
       );
     })
     .catch((error) => {
