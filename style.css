@@ -161,7 +161,7 @@ body {
   left: auto;
   right: auto;
   margin: auto;
-  top: 50%;
+  top: 10%; /* Default top for larger screens */
   font-size: 25px;
   padding: 10px 15px;
   border-radius: 30px;
@@ -222,6 +222,13 @@ body {
   .user__light--8 {
     right: -6vmin;
     animation-delay: 3.5s;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .user {
+    top: 30%; /* Change top position to 30% on mobile */
   }
 }
 
